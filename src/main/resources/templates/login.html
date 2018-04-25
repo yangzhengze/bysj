@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>毕业设计管理系统</title>
+    <link rel="shortcut icon" type="image/png" href="../static/img/favicon.ico" th:href="@{/img/favicon.ico}" />
+    <link rel="stylesheet"  type="text/css" href="../static/css/login.css"  th:href="@{css/login.css}" >
+    <link rel="stylesheet" type="text/css" href="../static/css/iCheck/minimal/green.css" th:href="@{css/iCheck/minimal/green.css}" >
+    <link rel="stylesheet"  type="text/css" href="../static/css/app.css" th:href="@{css/app.css}" >
+    <!-- animate -->
+    <link rel="stylesheet" type="text/css" href="../static/css/animate/animate.min.css" th:href="@{css/animate/animate.min.css}" >
+    <script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
+    <script type="text/javascript" src="../static/js/iCheck/icheck.js" th:src="@{js/iCheck/icheck.js}"></script>
+    <script type="text/javascript" src="../static/js/bootstrap-notify/bootstrap-notify.min.js" th:src="@{js/bootstrap-notify/bootstrap-notify.min.js}"></script>
+    <script type="text/javascript" src="../static/js/common.js" th:src="@{js/common.js}"></script>
+</head>
+
+<body>
+    <div>
+        <h1 class="big-title text-center">安顺学院本科毕业设计管理系统</h1>
+    </div>
+    <!-- Form-->
+    <div class="form">
+        <div class="form-toggle"></div>
+        <div class="form-panel one">
+            <div class="form-header">
+                <h1>用户登录</h1>
+            </div>
+            <div class="form-content">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" name="username" />
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" name="password" />
+                </div>
+                <div class="form-group" style="display:inline-block">
+                    <label for="code">验证码</label>
+                    <input type="text" name="code" style="width:50%; display:inline-block" />
+                    <img src="../static/img/timg.jpg" th:src="@{gifCode}" id="validateCodeImg" onclick="reloadCode()" style="display:inline-block" />
+                </div>
+                <div class="form-group" style="margin: 0px;">
+                    <p>
+                        <input type="checkbox" name="rememberme" />&nbsp;&nbsp;记住我</p>
+                </div>
+                <div class="form-group">
+                    <button onclick="login()">登录</button>
+                </div>
+            </div>
+        </div>
+     <!--不需要用户注册模块
+      <div class="form-panel two">
+            <div class="form-header">
+                <h1>账户注册</h1>
+            </div>
+            <div class="form-content">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" name="username" />
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" name="password" />
+                </div>
+                <div class="form-group">
+                    <label for="cpassword">确认密码</label>
+                    <input type="password" name="cpassword" />
+                </div>
+                <div class="form-group">
+                    <button onclick="regist()">注册</button>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div th:insert="common/footer"></div>
+</body>
+<script th:inline="javascript">
+	var ctx = [[@{/}]];
+</script>
+<script type="text/javascript" src="../static/js/app/login.js" th:src="@{js/app/login.js}"></script>
+
+</html>

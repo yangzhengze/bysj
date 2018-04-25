@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>毕业设计管理系统</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}" />
+    <!-- Vendor styles -->
+    <link rel="stylesheet" th:href="@{css/material-design-iconic-font/css/material-design-iconic-font.min.css}">
+    <link rel="stylesheet" th:href="@{css/jquery.scrollbar/jquery.scrollbar.css}">
+    <!-- App styles -->
+    <link rel="stylesheet" th:href="@{css/app.css}">
+    <!-- Bootstrap Table -->
+    <link rel="stylesheet" th:href="@{css/bootstrap-table/bootstrap-table.css}">
+    <!-- animate -->
+    <link rel="stylesheet" th:href="@{css/animate/animate.min.css}">
+    <!-- multiple-select -->
+    <link rel="stylesheet" th:href="@{css/multiple-select/multiple-select.css}">
+    <!-- jsTree -->
+    <link rel="stylesheet" th:href="@{css/jsTree/style.min.css}">
+    <!-- treeTable -->
+    <link rel="stylesheet" th:href="@{css/jqTreeGrid/jquery.treegrid.css}">
+    <!-- sweetalert2 -->
+    <link rel="stylesheet" th:href="@{css/sweetalert2/sweetalert2.css}">
+    <!-- datarangepicker -->
+    <link rel="stylesheet" th:href="@{css/daterangepicker/daterangepicker.css}">
+</head>
+<body data-ma-theme="green">
+    <div th:insert="common/common"></div>
+    <main class="main">
+        <div th:insert="common/header"></div>
+        <div th:insert="common/aside"></div>
+        <div th:insert="common/main"></div>
+    </main>
+    <div th:insert="system/user/updatePassword"></div>
+</body>
+<script th:inline="javascript">
+	var ctx = [[@{/}]];
+	var userName = [[${user.username}]];
+	var theme = [[${user.theme}]];
+	var avatar = ctx + "img/avatar/" + [[${user.avatar}]];
+</script>
+<script th:src="@{js/app/index.js}"></script>
+</html>
