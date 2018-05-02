@@ -87,6 +87,7 @@ CREATE TABLE `sys_dept` (
 
 LOCK TABLES `sys_dept` WRITE;
 /*!40000 ALTER TABLE `sys_dept` DISABLE KEYS */;
+INSERT INTO `sys_dept` VALUES (0,0,'测试',0,NULL,0);
 /*!40000 ALTER TABLE `sys_dept` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,7 +282,7 @@ CREATE TABLE `sys_user` (
   `password` varchar(100) DEFAULT NULL COMMENT '密码',
   `salt` varchar(50) DEFAULT NULL COMMENT '盐',
   `user_realname` varchar(100) DEFAULT NULL COMMENT '用户姓名',
-  `user_sex` smallint(6) DEFAULT NULL COMMENT '用户性别：性别 0     男 1女',
+  `user_sex` char(1) DEFAULT NULL COMMENT '用户性别：性别 0     男 1女',
   `email` varchar(100) DEFAULT NULL COMMENT '邮箱',
   `mobile` varchar(100) DEFAULT NULL COMMENT '手机号',
   `status` smallint(6) DEFAULT NULL COMMENT '状态：0：禁用   1：正常,',
@@ -304,7 +305,7 @@ CREATE TABLE `sys_user` (
 
 LOCK TABLES `sys_user` WRITE;
 /*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
-INSERT INTO `sys_user` VALUES (0,NULL,'tester','6ec0a6bfa5e58f32df2d8278f11786e4',NULL,NULL,NULL,NULL,NULL,NULL,'0000-00-00 00:00:00',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `sys_user` VALUES (0,0,'tester','6ec0a6bfa5e58f32df2d8278f11786e4',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2018-05-02 19:06:06','green','default.jpg',NULL);
 /*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -345,4 +346,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-25 19:33:36
+-- Dump completed on 2018-05-02 20:06:19
