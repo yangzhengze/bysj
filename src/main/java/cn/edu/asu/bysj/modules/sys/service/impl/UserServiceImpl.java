@@ -6,12 +6,16 @@ import cn.edu.asu.bysj.modules.sys.dao.UserRoleRepository;
 import cn.edu.asu.bysj.modules.sys.entity.User;
 import cn.edu.asu.bysj.modules.sys.entity.UserRole;
 import cn.edu.asu.bysj.modules.sys.service.UserService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author asuy 2018.4.24
@@ -134,6 +138,7 @@ public class UserServiceImpl  implements UserService{
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void updateLoginTime(String userName) {
         //查询出用户
         User user=findByName(userName);
@@ -143,8 +148,12 @@ public class UserServiceImpl  implements UserService{
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void updatePassword(String password) {
-
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        String newPassword = MD5Utils.encrypt(user.getUsername().toLowerCase(), password);
+        //user.setPassword(newPassword);
+        userRepository.updatePassword(user.getUser_id(),newPassword);
     }
 
     @Override
@@ -153,13 +162,44 @@ public class UserServiceImpl  implements UserService{
         return userRepository.findByUserId(user.getUser_id());
     }
 
+    /**
+     * 更新个人信息
+     * @param user
+     */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void updateUserProfile(User user) {
-        user.setUsername(null);
-        user.setPassword(null);
-        if (user.getDept_id() == null)
-            user.setDept_id(0l);
-        this.userRepository.save(user);
+      User user1= userRepository.findByUserId(user.getUser_id());
+        if (user.getDept_id() == null){
+            user1.setDept_id(0l);
+        }else {
+            user1.setDept_id(user.getDept_id());
+        }
+       if(user.getUsername()!=null){
+            user1.setUsername(user.getUsername());
+       }
+       if(user.getUser_sex()!=null){
+            user1.setUser_sex(user.getUser_sex());
+       }
+       if(user.getUser_photo_url()!=null){
+            user1.setUser_photo_url(user.getUser_photo_url());
+       }
+       if(user.getUser_realname()!=null){
+            user1.setUser_realname(user.getUser_realname());
+       }
+       if(user.getEmail()!=null){
+            user1.setEmail(user.getEmail());
+       }
+       if(user.getMobile()!=null){
+            user1.setMobile(user.getMobile());
+       }
+       if(user.getUser_theme()!=null){
+            user1.setUser_theme(user.getUser_theme());
+       }
+       if(user.getUser_description()!=null){
+            user1.setUser_description(user.getUser_description());
+       }
+        this.userRepository.save(user1);
     }
 
     @Override

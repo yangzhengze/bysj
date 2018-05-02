@@ -5,9 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -30,4 +28,10 @@ public interface UserRepository  extends JpaRepository<User,Long> {
      */
     @Query(nativeQuery = true,value ="select * from  sys_user where user_id=:user_id")
     User findByUserId(@Param("user_id")Long user_id);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true,value ="update sys_user set password=:newPasswd where user_id=:user_id")
+    void  updatePassword(@Param("user_id")long user_id,@Param("newPasswd") String newPasswd);
+
 }

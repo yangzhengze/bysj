@@ -1,11 +1,9 @@
 package cn.edu.asu.bysj.modules.sys.control;
 
-import java.util.List;
-import java.util.Map;
-
 import cn.edu.asu.bysj.common.annotation.Log;
 import cn.edu.asu.bysj.common.control.BaseController;
 import cn.edu.asu.bysj.common.domain.ResponseBo;
+import cn.edu.asu.bysj.common.util.MD5Utils;
 import cn.edu.asu.bysj.modules.sys.entity.User;
 import cn.edu.asu.bysj.modules.sys.service.UserService;
 import org.apache.commons.lang.StringUtils;
@@ -15,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Optional;
 
 @Controller
 public class UserController extends BaseController{
@@ -65,6 +61,21 @@ public class UserController extends BaseController{
 //        return getDataTable(pageInfo);
 //    }
 
+    @RequestMapping(path = "user/regist")
+    @ResponseBody
+    public ResponseBo regist(User user) {
+        try {
+            User result = this.userService.findByName(user.getUsername());
+            if (result != null) {
+                return ResponseBo.warn("该用户名已被使用！");
+            }
+            this.userService.registUser(user);
+            return ResponseBo.ok();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("注册失败，请联系网站管理员！");
+        }
+    }
     /**
      * 更换用户主题
      * @param theme
@@ -83,6 +94,39 @@ public class UserController extends BaseController{
             return ResponseBo.error();
         }
      }
+
+    /**
+     * 检查密码是否相等
+     * @param password
+     * @return
+     */
+    @RequestMapping(path = "user/checkPassword")
+    @ResponseBody
+    public boolean checkPassword(String password) {
+        User user = super.getCurrentUser();
+        String encrypt = MD5Utils.encrypt(user.getUsername().toLowerCase(), password);
+        if (user.getPassword().equals(encrypt)){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 更新用户密码
+     * @param newPassword
+     * @return
+     */
+    @RequestMapping("user/updatePassword")
+    @ResponseBody
+    public ResponseBo updatePassword(String newPassword) {
+        try {
+            this.userService.updatePassword(newPassword);
+            return ResponseBo.ok("更改密码成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("更改密码失败，请联系网站管理员！");
+        }
+    }
    //获取用户个人信息
     @RequestMapping(path = "user/profile")
     public String profileIndex(Model model) {
