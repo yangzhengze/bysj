@@ -100,12 +100,19 @@ public class UserController extends BaseController{
         return "system/user/profile";
     }
 
+    //@RequestParam(name = "user_id")
+
+    /**
+     * 获取个人信息
+     * @param user_id
+     * @return
+     */
     @RequestMapping(path = "user/getUserProfile")
     @ResponseBody
-    public ResponseBo getUserProfile(Long userId) {
+    public ResponseBo getUserProfile(@RequestParam Long user_id) {
         try {
             User user = new User();
-            user.setUser_id(userId);
+            user.setUser_id(user_id);
             return ResponseBo.ok(this.userService.findUserProfile(user));
         } catch (Exception e) {
             e.printStackTrace();

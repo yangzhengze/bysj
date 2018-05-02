@@ -155,7 +155,11 @@ public class UserServiceImpl  implements UserService{
 
     @Override
     public void updateUserProfile(User user) {
-
+        user.setUsername(null);
+        user.setPassword(null);
+        if (user.getDept_id() == null)
+            user.setDept_id(0l);
+        this.userRepository.save(user);
     }
 
     @Override
