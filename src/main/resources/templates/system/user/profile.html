@@ -24,11 +24,11 @@
     <div class="profile__info">
         <ul class="icon-list">
             <li><i class="zmdi zmdi-account"></i> [[${user.username}]] -- [[${user.roleName}]]</li>
-            <li><i class="zmdi zmdi-male-female"></i> [[${user.ssex}]]</li>
+            <li><i class="zmdi zmdi-male-female"></i> [[${user.user_sex}]]</li>
             <li><i class="zmdi zmdi-card-travel"></i> [[${#strings.defaultString(user.deptName,'无部门信息')}]]</li>
             <li><i class="zmdi zmdi-phone"></i> [[${#strings.defaultString(user.mobile,'无电话信息')}]]</li>
             <li id="profile__info_email"><i class="zmdi zmdi-email"></i><span> [[${#strings.defaultString(user.email,'无邮箱信息')}]]</span></li>
-            <li><i class="zmdi zmdi-comment-text"></i> <span>[[${#strings.defaultString(user.description,'暂无个人介绍')}]]</span></li>
+            <li><i class="zmdi zmdi-comment-text"></i> <span>[[${#strings.defaultString(user.user_description,'暂无个人介绍')}]]</span></li>
         </ul>
     </div>
 </div>
@@ -49,7 +49,7 @@
                                 <div class="form-group">
                                     <input type="text" name="username" class="form-control">
                                     <input type="text" hidden name="oldusername" class="form-control">
-                                    <input type="text" hidden name="userId" class="form-control">
+                                    <input type="text" hidden name="user_id" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -62,17 +62,17 @@
                                  </span>
                                 <div class="form-group">
                                     <label class="custom-control custom-radio">
-                                        <input name="ssex" type="radio" value="0" class="custom-control-input">
+                                        <input name="user_sex" type="radio" value="0" class="custom-control-input">
                                         <span class="custom-control-indicator"></span>
                                         <span class="custom-control-description">男</span>
                                     </label>
                                     <label class="custom-control custom-radio">
-                                        <input name="ssex" type="radio" value="1" class="custom-control-input">
+                                        <input name="user_sex" type="radio" value="1" class="custom-control-input">
                                         <span class="custom-control-indicator"></span>
                                         <span class="custom-control-description">女</span>
                                     </label>
                                     <label class="custom-control custom-radio">
-                                        <input name="ssex" type="radio" value="2" class="custom-control-input">
+                                        <input name="user_sex" type="radio" value="2" class="custom-control-input">
                                         <span class="custom-control-indicator"></span>
                                         <span class="custom-control-description">保密</span>
                                     </label>
@@ -113,7 +113,7 @@
                                 <div class="form-group">
                                     <div id="deptTree"></div>
                                 </div>
-                                <input type="hidden" name="deptId">
+                                <input type="hidden" name="dept_id">
                             </div>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                                     	 个人描述：
                                 </span>
                                 <div class="form-group">
-                                    <input type="text" name="description" class="form-control">
+                                    <input type="text" name="user_description" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -177,8 +177,8 @@
     </div>
 </div>
 <script th:inline="javascript">
-var avatar = ctx + "img/avatar/" + [[${user.avatar}]];
-var userId = [[${user.userId}]];
+var avatar = ctx + "img/avatar/" + [[${user.user_photo_url}]];
+var userId = [[${user.user_id}]];
 </script>
 <script th:src="@{js/app/system/user/profile.js}"></script>
 </html>

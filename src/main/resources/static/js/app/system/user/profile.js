@@ -55,20 +55,20 @@ function refreshUserProfile() {
 }
 
 function editUserProfile() {
-    $.post(ctx + "user/getUserProfile", { "userId": userId }, function(r) {
+    $.post(ctx + "user/getUserProfile", { "user_id": userId }, function(r) {
         if (r.code == 0) {
             var $form = $('#update-profile');
             $form.modal();
             var user = r.msg;
             $form.find("input[name='username']").val(user.username).attr("readonly", true);
             $form.find("input[name='oldusername']").val(user.username);
-            $form.find("input[name='userId']").val(user.userId);
+            $form.find("input[name='user_id']").val(user.user_id);
             $form.find("input[name='email']").val(user.email);
             $form.find("input[name='mobile']").val(user.mobile);
-            $form.find("input[name='description']").val(user.description);
-            $("input:radio[value='" + user.ssex + "']").attr("checked", true);
+            $form.find("input[name='user_description']").val(user.user_description);
+            $("input:radio[value='" + user.user_sex + "']").attr("checked", true);
             $('#deptTree').jstree().open_all();
-            $('#deptTree').jstree('select_node', user.deptId, true);
+            $('#deptTree').jstree('select_node', user.dept_id, true);
         } else {
             $MB.n_danger(r.msg);
         }

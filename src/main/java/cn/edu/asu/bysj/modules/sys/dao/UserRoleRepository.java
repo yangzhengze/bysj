@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * 用户角色
  */
-public interface UserRoleRepository extends JpaRepository<UserRole,Integer> {
+public interface UserRoleRepository extends JpaRepository<UserRole,Long> {
 }

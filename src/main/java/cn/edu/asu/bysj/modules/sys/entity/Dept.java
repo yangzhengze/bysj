@@ -12,7 +12,7 @@ public class Dept {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private  Integer dept_id;
+    private  Long dept_id;
 
     //上级部门ID
     private  Integer dparent_id;
@@ -29,11 +29,11 @@ public class Dept {
     //删除标记 是否删除  -1：已删除  0：正常
     private  Integer del_flag=0;
 
-    public Integer getDept_id() {
+    public Long getDept_id() {
         return dept_id;
     }
 
-    public void setDept_id(Integer dept_id) {
+    public void setDept_id(Long dept_id) {
         this.dept_id = dept_id;
     }
 

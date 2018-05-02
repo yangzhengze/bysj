@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Dict {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer dict_id;
+    private Long dict_id;
 
     //字典名称
     private  String dict_name;
@@ -40,11 +40,11 @@ public class Dict {
     //数据字典删除标记 删除标记  -1：已删除  0：正常
     private  Integer dict_del_flag=0;
 
-    public Integer getDict_id() {
+    public Long getDict_id() {
         return dict_id;
     }
 
-    public void setDict_id(Integer dict_id) {
+    public void setDict_id(Long dict_id) {
         this.dict_id = dict_id;
     }
 

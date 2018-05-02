@@ -13,32 +13,32 @@ public class UserRole implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer sys_userrole_id;
-    private Integer user_id;
+    private Long sys_userrole_id;
+    private Long user_id;
 
-    private  Integer  role_id;
+    private  Long  role_id;
 
-    public Integer getSys_userrole_id() {
+    public Long getSys_userrole_id() {
         return sys_userrole_id;
     }
 
-    public void setSys_userrole_id(Integer sys_userrole_id) {
+    public void setSys_userrole_id(Long sys_userrole_id) {
         this.sys_userrole_id = sys_userrole_id;
     }
 
-    public Integer getUser_id() {
+    public Long getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Integer user_id) {
+    public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
 
-    public Integer getRole_id() {
+    public Long getRole_id() {
         return role_id;
     }
 
-    public void setRole_id(Integer role_id) {
+    public void setRole_id(Long role_id) {
         this.role_id = role_id;
     }
 }

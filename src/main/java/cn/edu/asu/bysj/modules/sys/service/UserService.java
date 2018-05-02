@@ -3,6 +3,7 @@ package cn.edu.asu.bysj.modules.sys.service;
 import cn.edu.asu.bysj.modules.sys.entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService  {
    // UserWithRole findById(Long userId);
@@ -14,6 +15,12 @@ public interface UserService  {
      */
     User findByName(String userName);
 
+    /**
+     * 通过Id查找
+     * @param userId
+     * @return
+     */
+    User findById(Long userId );
     /**
      * 用户部门信息
      * @param user
@@ -39,14 +46,14 @@ public interface UserService  {
      * @param user
      * @param roles
      */
-    void addUser(User user, Integer[] roles);
+    void addUser(User user, Long[] roles);
 
     /**
      * 更新用户
      * @param user
      * @param roles
      */
-    void updateUser(User user, Integer[] roles);
+    void updateUser(User user, Long[] roles);
 
     /**
      * 删除用户
@@ -72,11 +79,17 @@ public interface UserService  {
      * @param user
      * @return
      */
-    User findUserProfile(User user);
+    User  findUserProfile(User user);
 
     /**
      * 更新个人描述
      * @param user
      */
     void updateUserProfile(User user);
+
+    /**
+     * 保存用户信息
+     * @param user
+     */
+    void  savaUser(User user);
 }

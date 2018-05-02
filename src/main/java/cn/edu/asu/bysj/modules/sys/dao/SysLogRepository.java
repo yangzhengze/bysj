@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * 系统日志
  */
-public interface SysLogRepository extends JpaRepository<SysLog,Integer>{
+public interface SysLogRepository extends JpaRepository<SysLog,Long>{
 }

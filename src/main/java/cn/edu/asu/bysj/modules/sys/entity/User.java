@@ -22,7 +22,7 @@ public class User implements Serializable{
      */
     public static final Integer STATUS_LOCK = 0;
 
-    public static final Integer SEX_UNKNOW = 2;
+    public static final String  SEX_UNKNOW = "2";
     //主题
     public static final String DEFAULT_THEME = "green";
     //头像
@@ -30,9 +30,9 @@ public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private  Integer user_id;    //@Column(name = "user_id")
+    private  Long user_id;    //@Column(name = "user_id")
     //部门id
-    private Integer dept_id;
+    private Long dept_id;
 
     //部门名称
     @Transient //在表中不存在的字段
@@ -47,7 +47,7 @@ public class User implements Serializable{
     //用户实际的名字
     private  String user_realname;
     //用户性别 0 男, 1女
-    private Integer user_sex;
+    private String  user_sex;
     //电子邮件
     private  String email;
     //手机号
@@ -71,12 +71,20 @@ public class User implements Serializable{
     private String roleName;
 
 
-    public Integer getUser_id() {
+    public Long getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Integer user_id) {
+    public void setUser_id(Long user_id) {
         this.user_id = user_id;
+    }
+
+    public Long getDept_id() {
+        return dept_id;
+    }
+
+    public void setDept_id(Long dept_id) {
+        this.dept_id = dept_id;
     }
 
     public String getUsername() {
@@ -135,13 +143,6 @@ public class User implements Serializable{
         this.user_create_time = user_create_time;
     }
 
-    public Integer getDept_id() {
-        return dept_id;
-    }
-
-    public void setDept_id(Integer dept_id) {
-        this.dept_id = dept_id;
-    }
 
     public String getDeptName() {
         return deptName;
@@ -159,11 +160,11 @@ public class User implements Serializable{
         this.user_realname = user_realname;
     }
 
-    public Integer getUser_sex() {
+    public String getUser_sex() {
         return user_sex;
     }
 
-    public void setUser_sex(Integer user_sex) {
+    public void setUser_sex(String user_sex) {
         this.user_sex = user_sex;
     }
 

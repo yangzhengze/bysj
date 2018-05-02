@@ -14,7 +14,7 @@ public class Role implements Serializable{
     //角色ID
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
-    private  Integer role_id;  //@Column(name = "role_id")
+    private  Long role_id;  //@Column(name = "role_id")
 
     //角色名称
     private  String role_name;
@@ -28,11 +28,11 @@ public class Role implements Serializable{
     //角色修改时间
     private  Date role_modify_time;
 
-    public Integer getRole_id() {
+    public Long getRole_id() {
         return role_id;
     }
 
-    public void setRole_id(Integer role_id) {
+    public void setRole_id(Long role_id) {
         this.role_id = role_id;
     }
 

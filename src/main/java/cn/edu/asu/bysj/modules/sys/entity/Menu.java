@@ -20,7 +20,7 @@ public class Menu implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private  Integer menu_id;
+    private  Long menu_id;
     //父级菜单ID
     private Integer mparent_id;
 
@@ -59,11 +59,11 @@ public class Menu implements Serializable {
         return TYPE_BUTTON;
     }
 
-    public Integer getMenu_id() {
+    public Long getMenu_id() {
         return menu_id;
     }
 
-    public void setMenu_id(Integer menu_id) {
+    public void setMenu_id(Long menu_id) {
         this.menu_id = menu_id;
     }
 

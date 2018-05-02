@@ -10,10 +10,10 @@ public class SysLog implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private  Integer syslog_id;
+    private  Long syslog_id;
 
     //操作用户ID
-    private Integer user_id;
+    private Long user_id;
 
     @Transient
     private  String option_userName;
@@ -43,20 +43,20 @@ public class SysLog implements Serializable{
     @Transient
     private String timeField;
 
-    public Integer getSyslog_id() {
-        return syslog_id;
-    }
-
-    public void setSyslog_id(Integer syslog_id) {
-        this.syslog_id = syslog_id;
-    }
-
-    public Integer getUser_id() {
+    public Long getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Integer user_id) {
+    public void setUser_id(Long user_id) {
         this.user_id = user_id;
+    }
+
+    public Long getSyslog_id() {
+        return syslog_id;
+    }
+
+    public void setSyslog_id(Long syslog_id) {
+        this.syslog_id = syslog_id;
     }
 
     public String getOption_userName() {

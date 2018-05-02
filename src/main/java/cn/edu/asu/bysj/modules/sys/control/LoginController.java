@@ -53,9 +53,8 @@ public class LoginController extends BaseController{
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
         try {
             super.login(token);
-//            User user=new User();
-//            user.setUser_create_time(new Date());
-//            userRepository.
+            //更新登录时间
+            userService.updateLoginTime(username);
             return ResponseBo.ok();
         } catch (UnknownAccountException e) {
             return ResponseBo.error(e.getMessage());

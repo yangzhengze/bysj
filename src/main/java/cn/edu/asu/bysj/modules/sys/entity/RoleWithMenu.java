@@ -5,15 +5,23 @@ import java.util.List;
 public class RoleWithMenu extends Role {
 
 
-    private Integer menuId;
+    private Long menuId;
 
-    private List<Integer> menuIds;
+    private List<Long> menuIds;
 
-    public Integer getMenuId() {
+    public Long getMenuId() {
         return menuId;
     }
 
-    public void setMenuId(Integer menuId) {
+    public void setMenuId(Long menuId) {
         this.menuId = menuId;
+    }
+
+    public List<Long> getMenuIds() {
+        return menuIds;
+    }
+
+    public void setMenuIds(List<Long> menuIds) {
+        this.menuIds = menuIds;
     }
 }

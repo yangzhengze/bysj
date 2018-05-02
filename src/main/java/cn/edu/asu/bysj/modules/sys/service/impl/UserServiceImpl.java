@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author asuy 2018.4.24
@@ -42,6 +39,12 @@ public class UserServiceImpl  implements UserService{
     }
 
     @Override
+    public  User findById(Long userId) {
+    //   Optional<User> user= userRepository.findById(userId);
+       return userRepository.findByUserId(userId);
+    }
+
+    @Override
     public List<User> findUserWithDept(User user) {
        try {
           // return userRepository.findById();
@@ -54,7 +57,7 @@ public class UserServiceImpl  implements UserService{
     }
 
     /**
-     * 用户注册
+      * 用户注册
      * @param user
      */
     @Override
@@ -71,28 +74,27 @@ public class UserServiceImpl  implements UserService{
         /**
          * 3:注册账户', '注册账户，只可查看，不可操作'
          */
-        userRole.setRole_id(3);
+        userRole.setRole_id(3L);
         userRoleRepository.save(userRole);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void updateTheme(String theme, String userName) {
-        User user=new User();
+        User user=findByName(userName);
         user.setUser_theme(theme);
-        userRepository.saveAndFlush(user);
-
+        userRepository.save(user);
     }
 
     @Override
-    public void addUser(User user, Integer[] roles) {
+    public void addUser(User user, Long[] roles) {
            user.setUser_create_time(new Date());
            user.setUser_theme(User.DEFAULT_THEME);
            user.setUser_photo_url(User.DEFAULT_AVATAR);
            user.setPassword(MD5Utils.encrypt(user.getUsername(),user.getPassword()));
            userRepository.save(user);
            //设置权限
-           for(Integer roleId:roles){
+           for(Long roleId:roles){
                UserRole userRole =new UserRole();
                   userRole.setUser_id(user.getUser_id());
                   userRole.setRole_id(roleId);
@@ -102,7 +104,7 @@ public class UserServiceImpl  implements UserService{
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public void updateUser(User user, Integer[] roles) {
+    public void updateUser(User user, Long[] roles) {
             user.setUsername(null);
             user.setPassword(null);
             user.setUser_modify_time(new Date());
@@ -110,7 +112,7 @@ public class UserServiceImpl  implements UserService{
             //先删除用户角色信息
             userRoleRepository.deleteById(user.getUser_id());
             //保存角色信息
-            for(Integer roleId:roles){
+            for(Long roleId:roles){
                 UserRole userRole =new UserRole();
                  userRole.setUser_id(user.getUser_id());
                  userRole.setRole_id(roleId);
@@ -124,7 +126,7 @@ public class UserServiceImpl  implements UserService{
     public void deleteUsers(String userIds) {
         List<String> lists = Arrays.asList(userIds.split(","));
        for(String list:lists){
-           userRepository.findById(Integer.valueOf(list));
+           userRepository.findById(Long.valueOf(list));
 
        }
         userRepository.deleteAll();
@@ -133,7 +135,11 @@ public class UserServiceImpl  implements UserService{
 
     @Override
     public void updateLoginTime(String userName) {
-
+        //查询出用户
+        User user=findByName(userName);
+        //更新用户时间
+        user.setUser_lastlogin_time(new Date());
+        userRepository.save(user);
     }
 
     @Override
@@ -143,7 +149,8 @@ public class UserServiceImpl  implements UserService{
 
     @Override
     public User findUserProfile(User user) {
-        return null;
+
+        return userRepository.findByUserId(user.getUser_id());
     }
 
     @Override
@@ -151,7 +158,10 @@ public class UserServiceImpl  implements UserService{
 
     }
 
-
+    @Override
+    public void savaUser(User user) {
+        userRepository.save(user);
+    }
 
 
 }

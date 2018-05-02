@@ -1,9 +1,11 @@
 package cn.edu.asu.bysj.modules.sys.dao;
 
 import cn.edu.asu.bysj.modules.sys.entity.User;
-import cn.edu.asu.bysj.modules.sys.entity.UserWithRole;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 
 import java.util.List;
 
@@ -13,16 +15,19 @@ import java.util.List;
  * 用户
  *
  */
-public interface UserRepository  extends JpaRepository<User,Integer> {
+public interface UserRepository  extends JpaRepository<User,Long> {
     /**
      * 根据用户名查询用户
      * @return
      */
     User findByUsername(String userName);
 
-    //List<User> findByDeptName(User user);
-//
-//    List<UserWithRole> findUserWithRole(Long userId);
-//
-//    User findUserProfile(User user);
+    /**
+     * 根据用户ID查询单个用户
+     * @param user_id
+     * @return
+     * 开启nativeQuery=true，在value里可以用原生SQL语句完成查询
+     */
+    @Query(nativeQuery = true,value ="select * from  sys_user where user_id=:user_id")
+    User findByUserId(@Param("user_id")Long user_id);
 }
